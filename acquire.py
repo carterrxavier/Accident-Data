@@ -22,8 +22,8 @@ chromedriver = dir_path + '/chromedriver'
 os.environ['webdriver.chrome.driver'] = chromedriver
 
 
-######## The data on the website will be scrapped 791 days back from today, initial scrape done 7/31/2021 ######
-numdays = 796
+######## The data on the website will be scrapped 6 months back from today(188 days), initial scrape done 8/8/2021 ######
+numdays = 188
 base = datetime.datetime.today()
 date_list = [base - datetime.timedelta(days=x) for x in range(numdays)]
 #reverse list to get older accidents first
@@ -32,19 +32,18 @@ date_list.sort(reverse=False)
 ###only store after date after itterating about 30 days, here we're getting a rough estimate of month increments, 29 day increments creates list of 20 dates, easier number to work with in the next step. we're scraping 1 month at a time from the website.
 date = 0
 month_periods = []
-for i in range(27):
+for i in range(6):
     month_periods.append(str(date_list[date].year) + '-'+  str(date_list[date].month) + '-' + str(date_list[date].day))
     date += 29
     
 
 accident_list = [] # the list in which the accident links will be stored
 #looking at two indexes, look at index accidents between index 0 and index 1, then index 2 and index 3
-index = 0
-for i in range(int(len(month_periods)/2 - 1)):
+for i in range(int(len(month_periods))-1):
     #open webscrapper
     driver = webdriver.Chrome(executable_path=chromedriver)
     #set url to month start date and end date specified in previous step
-    url = f'https://app.myaccident.org/results?startDate={month_periods[index]}&endDate={month_periods[index+1]}&lat=29.410489385788157&lng=-98.47068431884783&radius=16903'
+    url = f'https://app.myaccident.org/results?startDate={month_periods[i]}&endDate={month_periods[i+1]}&lat=29.410489385788157&lng=-98.47068431884783&radius=16903'
     driver.get(url)
     #Wait for page to load, timeout after 60 seconds
     ui.WebDriverWait(driver, 60).until(EC.visibility_of_all_elements_located((By.ID, 'root')))
@@ -59,7 +58,6 @@ for i in range(int(len(month_periods)/2 - 1)):
             accident_list.append(dictionary)
     #close webscrapper
     driver.close()
-    index += 2
 #create list of website urls for the next step, grabbing the contents off of each page
 all_links = pd.DataFrame(accident_list)
 all_links.to_csv('accident_links.csv', index = False)

@@ -145,8 +145,9 @@ for i in range(len(links)):
         #done within this indnent brecause each car in the accident is an onservation. so cars in the same accident will share the same information.
         dictionary = {'case_id': caseId[1], 'crash_id' : crashId[1], 'crash_city': city, 'crash_date':date, 'police_dept': Police, 'accident_factor': accident_factor, 'speed_limit' : speedlimit \
                       ,'crash_location': accidentLocation, 'num_of_injuries': injuryNumber, 'num_of_vehicles': numberofVehicles , 'num_of_occupants': numberofOccupants, 'at_fault' : atFault \
-                      , 'car_make':carMake, 'car_year': carYear, 'car_color': carColor, 'driver_age':driverAge, 'driver_gender': driverGender, 'driver_ethnicity' : driverEthnicity \
-                      ,'driver_residence': driverResidence,'driver_car_damage':driverCarDamage,'driver_license_type':driverLicenseType, 'driver_license_state': driverLicenseState, 'driver_insured': driverInsured, 'traffic_conditions':trafficConditions, 'weather_conditions': weatherConditions}
+                      ,'car_make':carMake, 'car_year': carYear, 'car_color': carColor, 'driver_age':driverAge, 'driver_gender': driverGender, 'driver_ethnicity' : driverEthnicity \
+                      ,'driver_residence': driverResidence,'driver_car_damage':driverCarDamage,'driver_license_type':driverLicenseType, 'driver_license_state': driverLicenseState\
+                      ,'driver_insured': driverInsured, 'traffic_conditions':trafficConditions, 'weather_conditions': weatherConditions}
        
         
         list_of_dicts.append(dictionary)
