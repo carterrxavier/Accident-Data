@@ -37,6 +37,8 @@ for i in range(len(links)):
     driver.get(url)
     ui.WebDriverWait(driver, 15).until(EC.visibility_of_all_elements_located((By.ID, 'ACCIDENT')))
     
+    
+    
     containers = driver.find_elements_by_id('accident-top')
     for container in containers:
         variables = container.text.split('\n')

@@ -23,7 +23,7 @@ os.environ['webdriver.chrome.driver'] = chromedriver
 
 
 ######## The data on the website will be scrapped 6 months back from today(188 days), initial scrape done 8/8/2021 ######
-numdays = 188
+numdays = 60
 base = datetime.datetime.today()
 date_list = [base - datetime.timedelta(days=x) for x in range(numdays)]
 #reverse list to get older accidents first
@@ -32,7 +32,7 @@ date_list.sort(reverse=False)
 ###only store after date after itterating about 30 days, here we're getting a rough estimate of month increments, 29 day increments creates list of 20 dates, easier number to work with in the next step. we're scraping 1 month at a time from the website.
 date = 0
 month_periods = []
-for i in range(6):
+for i in range(2):
     month_periods.append(str(date_list[date].year) + '-'+  str(date_list[date].month) + '-' + str(date_list[date].day))
     date += 29
     
