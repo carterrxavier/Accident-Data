@@ -28,9 +28,9 @@ if os.path.isfile('accident_links_continued.csv'):
     links = pd.read_csv('accident_links_continued.csv')
 else:
     links = pd.read_csv('accident_links.csv')
-links.drop_duplicates().shape
-list_of_dicts = []
+links = links.drop_duplicates()
 for i in range(len(links)):
+    list_of_dicts = []
     print(links.link[i])
     url = links.link[i]
     driver = webdriver.Chrome(executable_path=chromedriver)     
@@ -155,6 +155,8 @@ for i in range(len(links)):
         list_of_dicts.append(dictionary)
     df = df.append(list_of_dicts)
     df.to_csv('accident_data.csv', index=False)
+    
+    
     
     links = links.iloc[1: , :]
     links.to_csv('accident_links_continued.csv',index=False)
